@@ -49,12 +49,20 @@ class AssistanceSystem {
             .dailyRecords[day] = record
         fileStorage.saveAllUsers(users)
     }
-    fun getDailyTime(id: Int,day:Int):Int{
+    fun getTodayTime(id: Int, day:Int):Int{
        val user = users[id] ?: return 0
         val weeklyRecords = user.weeklyRecords
        val weeklyRecord = weeklyRecords[nowWeek] ?: return 0
        val dailyRecords = weeklyRecord.dailyRecords
        val dailyRecord = dailyRecords[day]?: return 0
+        return  dailyRecord.getTotalTime()
+    }
+    fun getSomedayTime(id: Int, day:Int,week:Int):Int{
+        val user = users[id] ?: return 0
+        val weeklyRecords = user.weeklyRecords
+        val weeklyRecord = weeklyRecords[week] ?: return 0
+        val dailyRecords = weeklyRecord.dailyRecords
+        val dailyRecord = dailyRecords[day]?: return 0
         return  dailyRecord.getTotalTime()
     }
     fun getWeeklyTime(id:Int,week:Int):Int{
